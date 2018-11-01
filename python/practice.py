@@ -213,3 +213,31 @@ def rotLeft(a, d):
     return L
 rotLeft([1,2,3,4,5], 4)
 rotLeft([41, 73, 89, 7, 10, 1, 59, 58, 84, 77, 77, 97, 58, 1, 86, 58, 26, 10, 86, 51], 10)
+
+#New Year's Chaos
+
+def minimumBribes(skip_array):
+    skippers = []
+    array_len = len(skip_array)
+    for i in range(1,array_len+1):
+        skips = skip_array.index(i)
+        skippers += skip_array[:skips]
+        skip_array.remove(i)
+
+    for i in set(skippers):
+        if skippers.count(i) > 2:
+          print("Too chaotic")
+          return
+
+    print(len(skippers))
+
+def minimumBribes(q):
+    bribes = 0
+    for i in range(len(q)-1,-1,-1):
+        if q[i] - (i + 1) > 2:
+            print('Too chaotic')
+            return
+        for j in range(max(0, q[i] - 2), i):
+            if q[j] > q[i]:
+                bribes+=1
+    print(bribes)
