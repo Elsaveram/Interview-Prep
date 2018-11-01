@@ -241,3 +241,24 @@ def minimumBribes(q):
             if q[j] > q[i]:
                 bribes+=1
     print(bribes)
+
+#String Manipulation
+#Making Anagrams
+def makeAnagram(a, b):
+    deletions=0
+    a=list(a)
+    b=list(b)
+    for letter in list(set(list(a+b))):
+        a_count=a.count(letter)
+        b_count=b.count(letter)
+        if abs(a_count-b_count) != 0:
+            deletions += abs(a_count-b_count)
+    return deletions
+
+#Alternating Characters
+def alternatingCharacters(s):
+    deletions=0
+    for i in range(len(s)-1):
+        if s[i]==s[i+1]:
+            deletions += 1
+    return deletions
