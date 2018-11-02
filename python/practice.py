@@ -262,3 +262,26 @@ def alternatingCharacters(s):
         if s[i]==s[i+1]:
             deletions += 1
     return deletions
+
+#Bubble Sort: It compares adjacent elements and exchanges those that are out of order.
+def bubbbleSort(myList):
+    for i in range (0, len(myList)-1):
+        for j in range(0, len(myList)-1-i):
+            if myList[j] > myList[j+1]:
+                myList[j], myList[j+1] = myList[j+1], myList[j]
+    return myList
+
+bubbbleSort([3, 2, 1, 4])
+
+def countSwaps(a):
+    numSwaps=0
+    for i in range (0, len(a)-1):
+        for j in range(0, len(a)-1-i):
+            if a[j] > a[j+1]:
+                a[j], a[j+1] = a[j+1], a[j]
+                numSwaps += 1
+    print ('Array is sorted in {} swaps.'.format(numSwaps))
+    print ('First Element: {}'.format(a[0]))
+    print ('Last Element: {}'.format(a[-1]))
+
+countSwaps([3,2,1])
