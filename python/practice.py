@@ -310,3 +310,21 @@ def maximumToys(prices, budget):
     return i
 
 maximumToys([1,2,3,4], 7)
+
+#Ransome Note
+def checkMagazine(magazine, note):
+    my_dict={}
+    for word in list(set(magazine.split())):
+        my_dict[word]=magazine.count(word)
+    for w in note.split():
+        if w in my_dict.keys():
+            my_dict[w] -= 1
+            if my_dict[w] <0:
+                print('No')
+                return
+        else:
+            print ('No')
+            return
+    print ('Yes')
+
+checkMagazine('ive got a lovely bunch of coconuts', 'ive got some coconuts')
