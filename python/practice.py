@@ -285,3 +285,28 @@ def countSwaps(a):
     print ('Last Element: {}'.format(a[-1]))
 
 countSwaps([3,2,1])
+
+#Mark and Toys
+def maximumToys(prices, k):
+    cost=0
+    toys=[]
+    prices.sort()
+    for toy in prices:
+        cost += toy
+        toys.append(toy)
+        if cost > k:
+            break
+    return len(toys)-1
+
+
+def maximumToys(prices, budget):
+    cost=0
+    i=0
+    prices.sort()
+    while i < len(prices) and cost + prices[i] < budget:
+        cost += prices[i]
+        i += 1
+
+    return i
+
+maximumToys([1,2,3,4], 7)
