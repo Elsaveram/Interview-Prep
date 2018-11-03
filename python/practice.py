@@ -328,3 +328,48 @@ def checkMagazine(magazine, note):
     print ('Yes')
 
 checkMagazine('ive got a lovely bunch of coconuts', 'ive got some coconuts')
+
+#Two String
+def twoStrings(s1, s2):
+    my_dict={}
+    for letter in list(set(list(s1)))
+        my_dict[letter]= s1.count(letter)
+    for l in list(s2):
+        if l in my_dict.keys():
+            return 'YES'
+    return 'NO'
+
+
+def twoStrings(s1, s2):
+    my_set = set( list(s1) )
+    for l in list(s2):
+        if l in my_set:
+            return 'YES'
+    return 'NO'
+
+twoStrings('hi', 'world')
+
+# Minimum Absolute Difference in an Array
+def minimumAbsoluteDifference(arr):
+    min_diff=[]
+    for i in range(len(arr)-1):
+        for j in range(i+1, len(arr)):
+            min_diff.append(abs(arr[i]-arr[j]))
+            if abs(arr[i]-arr[j]
+    print(min(min_diff))
+
+def minimumAbsoluteDifference(arr):
+    min_diff=[]
+    for i in range(len(arr)-1):
+        for j in range(i+1, len(arr)):
+            min_diff.append(abs(arr[i]-arr[j]))
+    return(min(min_diff))
+
+minimumAbsoluteDifference([-59, -36, -13, 1, -53, -92, -2, -96, -54, 75])
+
+def minimumAbsoluteDifference(arr):
+    arr.sort()
+    min_diff=[]
+    for i in range(len(arr)-1):
+        min_diff.append(abs(arr[i+1]-arr[i]))
+    return(min(min_diff))
