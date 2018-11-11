@@ -133,3 +133,110 @@ clf.score(X_test, y_test)
 #Predict the holdout set
 predictions = cross_val_predict(linreg_1, X, y, cv = 5)
 metrics.r2_score(y, predictions)
+
+######KAGGLE WORKFLOW###################################################################################################
+
+##Preprocess
+##Save the ID column
+train_ID = train_df['Id']
+test_ID = test_df['Id']
+
+# Now drop the 'Id' colum since we can not use it as a feature to train our model.
+train_df.drop("Id", axis = 1, inplace = True)
+test_df.drop("Id", axis = 1, inplace = True)
+
+##Separate the response variable and the predictor variables into separate df
+y_train = train_df['SalePrice']
+X_train = train_df.drop('SalePrice', axis=1)
+X_test = test_df.copy()
+
+##Feature engineering:
+#Combine training and test dataframes before feature engineering.
+#For categorial features, this is fine because you want to avoid having new categories in the test set, which will cause
+#different dimensions after dummify the data set.
+#If you want to perform any transformation (normalization, standardization, etc) on the numerical features, you should
+#fit on the training set and transform on the test set (use the training average for imputing missing values for example)
+
+all_data = pd.concat([X_train, X_test], ignore_index=True)
+all_data.shape
+
+##CATEGORICAL FEATURES
+
+#One-hot encoding
+#Basic method: used with most linear algorithm
+#Drop first column avoids collinearity
+
+one_hot_df = pd.get_dummies(all_data, drop_first=True, dummy_na=True)
+one_hot_df.head()
+
+#Label encoding
+#Useful for tree-based algorithms
+#Does not increase dimensionality
+from sklearn.preprocessing import LabelEncoder
+
+label_df = all_data.copy()
+
+for c in label_df.columns:
+    if label_df[c].dtype == 'object':
+        le = LabelEncoder()
+        # Need to convert the column type to string in order to encode missing values
+        label_df[c] = le.fit_transform(label_df[c].astype(str))
+
+#Label count encoding
+#For categorical features with many categories(rows:categories ration 20:1 or less)
+#Rank categorical variables by count in the training set and transform the test set
+#Iterate counter for each CV fold - fit on the new training set and transform on the new test set
+#Useful for both linear or non-linear algorithms
+
+class LabelCountEncoder(object):
+    def __init__(self):
+        self.count_dict = {}
+
+    def fit(self, column):
+        # This gives you a dictionary with level as the key and counts as the value
+        count = column.value_counts().to_dict()
+        # We want to rank the key by its value and use the rank as the new value
+        # Your code here
+
+
+    def transform(self, column):
+        # If a category only appears in the test set, we will assign the value to zero.
+        missing = 0
+        # Your code here
+        return column.map(lambda x:self.count_dict.get(x, missing))
+
+
+    def fit_transform(self, column):
+        self.fit(column)
+        return self.transform(column)
+
+l
+abel_count_df = X_train.copy()
+
+for c in label_count_df.columns:
+    if label_count_df[c].dtype == 'object':
+        lce = LabelCountEncoder()
+        label_count_df[c] = lce.fit_transform(label_count_df[c])
+
+##ORDINAL FEATURES
+#Label Count encoding is good in general, however, some of the features are ordinal in nature.
+#For example, we usually consider Excellent > Good > Average/Typical > Fair > Poor
+#We can construct a dictionary like the following and map it to those columns:
+
+ord_cols = ['ExterQual', 'ExterCond','BsmtCond','HeatingQC', 'KitchenQual',
+           'FireplaceQu', 'GarageQual', 'GarageCond', 'PoolQC']
+ord_dic = {'Ex': 5, 'Gd': 4, 'TA': 3, 'Fa':2, 'Po':1}
+
+ord_df = X_train.copy()
+
+for col in ord_cols:
+    ord_df[col] = ord_df[col].map(lambda x: ord_dic.get(x, 0))
+
+
+##PARAMETER TUNING
+#Grid search
+#Bayesian Optimization Method
+
+##Ensesmble
+#Averaging the predictions
+#Stacking

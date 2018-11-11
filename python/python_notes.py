@@ -168,7 +168,7 @@ fruit=set(['apple', 'orange'])
 primes={2, 3, 4, 5, 6}
 set(map(lambda x: x*x, primes))
 
-#Dictionaries
+#Dictionaries: unordered, hashable data structures that stores key-value pairs
 employee={'sex':'male', 'height':6.1, 'age':38}
 employee['age']
 employee['city']='New York'
@@ -177,6 +177,10 @@ employee
 employee.keys()
 employee.values()
 dict([('hola', 32), ('hola2', 44)])
+del employee['age']
+employee.clear()
+del employee
+dir(employee)
 
 #Conditionals
 def firstelt(L):
@@ -324,3 +328,5 @@ stats.ttest_ind(X, Y)
 #ANOVA
 Z=np.random.rand(100)
 stats.f_oneway(X, Y, Z)
+
+#THe Bubble Sort

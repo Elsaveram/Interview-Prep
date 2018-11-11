@@ -94,7 +94,7 @@ num_people=20
 num_simu=int(1e4)
 Bool = np.zeros(num_simu)
 for i in range(num_simu):
-    test=np.random.choice(range(366), size=20, replace=True)
+    test=np.random.choice(range(366), size=30, replace=True)
     Bool[i]=(len(set(test)) != num_people)
 np.mean(Bool)
 
@@ -373,3 +373,98 @@ def minimumAbsoluteDifference(arr):
     for i in range(len(arr)-1):
         min_diff.append(abs(arr[i+1]-arr[i]))
     return(min(min_diff))
+
+def luckBalance(k, contests):
+    luck_imp=[]
+    luck_not_imp=[]
+    for i in range(len(contests)):
+        if contests[i][1]==1:
+            luck_imp.append(contests[i][0])
+        else:
+            luck_not_imp.append(contests[i][0])
+    luck_imp.sort()
+    print(luck_not_imp)
+    print(luck_imp)
+    if len(luck_imp)<k or len(luck_imp)==k:
+        win=0
+        final_luck=sum(luck_not_imp)+sum(luck_imp)
+    else:
+        win=len(luck_imp)-k
+    final_luck=sum(luck_not_imp)+sum(luck_imp[:win-1:-1])-sum(luck_imp[:win])
+    return final_luck
+
+#Greatest integer whose product with 5 is less than 67.
+max([x for x in range(50) if x*5<67])
+
+#Unique letters in a word
+def count_letter(word):
+    return len(list(set(word)))
+
+def count_letter(word):
+    my_unique_letters=[]
+    for letter in word:
+        if letter not in my_unique_letters:
+            my_unique_letters.append(letter)
+    return len(my_unique_letters)
+
+count_letter('happy')
+
+#Write a function that returns the common elements between two lists, each element only one time e.g. intersect([3,1,2,1], [1,4,2,2]) = [1,2]
+def intersect(L1, L2):
+    common=[]
+    for element in list(set(L2)):
+        if element in list(set(L1)):
+            common.append(element)
+    return(common)
+
+def intersect(a, b):
+    return list(set(a).intersection(set(b)))
+
+#Write a function that returns all of the prime numbers within a given range.
+get_primes(1,13) = [2,3,5,7,11,13]
+
+def prime_num(x):
+    if x>=2:
+        for num in range(2, x):
+            if not x%num!=0:
+                return False
+    else:
+        return False
+    return True
+
+def get_primes(n):
+    my_primes=[]
+    for num in range(n+1):
+        if prime_num(num):
+            my_primes.append(num)
+    return my_primes
+
+get_primes(13)
+
+#Write a function which gets the index of a given value in a sorted list:
+def ret_index(lis, n):
+    my_dict={}
+    for i in range(len(lis)):
+        my_dict[lis[i]]=i
+    return my_dict[n]
+
+lis = [1,2,4,5,11,19,95,116]
+ret_index(lis, 4)
+
+#If x is a float and n is a integer, define a function to calculate x^n without using the built in Python method.
+
+def my_power(x,n):
+    positive=x
+    negative=1
+    if n==0:
+        return 1
+    elif n>0:
+        for i in range(n-1):
+            positive=positive*x
+        return positive
+    else:
+        for i in range(abs(n+1)):
+            negative=negative/x
+        return negative
+
+my_power(10,-3)
