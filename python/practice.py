@@ -421,7 +421,6 @@ def intersect(a, b):
     return list(set(a).intersection(set(b)))
 
 #Write a function that returns all of the prime numbers within a given range.
-get_primes(1,13) = [2,3,5,7,11,13]
 
 def prime_num(x):
     if x>=2:
@@ -441,6 +440,7 @@ def get_primes(n):
 
 get_primes(13)
 
+
 #Write a function which gets the index of a given value in a sorted list:
 def ret_index(lis, n):
     my_dict={}
@@ -450,6 +450,9 @@ def ret_index(lis, n):
 
 lis = [1,2,4,5,11,19,95,116]
 ret_index(lis, 4)
+
+def ret_idx(lis, val):
+    return lis.index(val)
 
 #If x is a float and n is a integer, define a function to calculate x^n without using the built in Python method.
 
@@ -468,3 +471,80 @@ def my_power(x,n):
         return negative
 
 my_power(10,-3)
+
+#Write code for all numbers up to 100 and print “fizz” if divisible by 3, “buzz” if divisible by 5, and “fizzbuzz” if divisible by 3 and 5.
+
+for n in range(101):
+    if n%3==0 and n%5==0:
+        print('fizzbuzz')
+    elif n%3==0:
+        print('fizz')
+    elif n%5==0:
+        print('buzz')
+#Compute the parity of an integer
+
+def parity(x):
+    result=0
+    while x:
+        result ^= x & 1
+        x>>=1
+    return result
+
+parity(10101010)
+
+#HackerRank
+
+#Python ifelse
+
+
+if n%2 !=0:
+    print('Weird')
+elif n in range(2, 6):
+    print('Not Weird')
+elif n in range(6, 21):
+    print('Weird')
+elif n>20:
+    print('Not Weird')
+
+
+check = {True: "Not Weird", False: "Weird"}
+
+print(check[
+        n%2==0 and (
+            n in range(2,6) or
+            n > 20)
+    ])
+
+#Arithmetic operators:
+    print(a+b)
+    print(a-b)
+    print(a*b)
+
+#Division
+
+print(a//b)
+print(a/b)
+
+#Loops
+for i in range(N):
+    print(i**2)
+
+#Function. Leap year boolean.
+
+def is_leap(year):
+    leap=True
+    if year%100==0:
+        if year%400 !=0:
+            leap=False
+    elif year%4 !=0:
+        leap=False
+    return leap
+
+is_leap(1990)
+
+
+#Print Function
+
+
+print(int(''.join(map(str, list(range(n+1))))))
+print(*list(range(1, n+1)), sep='')
