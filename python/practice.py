@@ -481,22 +481,10 @@ for n in range(101):
         print('fizz')
     elif n%5==0:
         print('buzz')
-#Compute the parity of an integer
-
-def parity(x):
-    result=0
-    while x:
-        result ^= x & 1
-        x>>=1
-    return result
-
-parity(10101010)
 
 #HackerRank
 
 #Python ifelse
-
-
 if n%2 !=0:
     print('Weird')
 elif n in range(2, 6):
@@ -521,7 +509,6 @@ print(check[
     print(a*b)
 
 #Division
-
 print(a//b)
 print(a/b)
 
@@ -530,7 +517,6 @@ for i in range(N):
     print(i**2)
 
 #Function. Leap year boolean.
-
 def is_leap(year):
     leap=True
     if year%100==0:
@@ -544,7 +530,34 @@ is_leap(1990)
 
 
 #Print Function
-
-
 print(int(''.join(map(str, list(range(n+1))))))
 print(*list(range(1, n+1)), sep='')
+
+#Solve Me First
+def compareTriplets(a, b):
+    score_a=0
+    score_b=0
+    for i in range(len(a)):
+        if a[i]>b[i]:
+            score_a += 1
+        elif a[i]<b[i]:
+            score_b += 1
+    return (score_a, score_b)
+
+compareTriplets([17, 28, 30], [99,16,8])
+
+#Diagonal Diference
+
+def diagonalDifference(arr):
+    d1=0
+    d2=0
+    n=len(arr)
+    for i in range(n):
+        for j in range(n):
+            if i==j: #Primary diagonal
+                d1 += arr[i][j]
+            if i==n-j-1: #Secondary diagonal
+                d2 += arr[i][j]
+    return abs(d1-d2)
+
+diagonalDifference([[11,2,4],[4,5,6],[10, 8, -12]])                
