@@ -290,7 +290,9 @@ np.diagonal(A)
 #Matrix type
 x=np.matrix([[3,2],[2,3]])
 y=np.matrix([[3,3],[2,2]])
-x.shape
+x
+x[1,1]
+x.shape[0]
 
 #Multiplication DOES NOT work pointwise (as in arrays). DOT PRODUCT (row times a column)
 z=x*y
@@ -329,4 +331,99 @@ stats.ttest_ind(X, Y)
 Z=np.random.rand(100)
 stats.f_oneway(X, Y, Z)
 
-#THe Bubble Sort
+####Data Visualization ################################################################################################
+from matplotlib import pyplot as plt
+plt.style.use('ggplot')
+
+df = pd.read_csv('https://s3.amazonaws.com/nycdsabt01/movie_metadata.csv')
+
+df.columns.tolist()
+pd.set_option('display.max_columns', 50)
+df.head()
+df.shape
+df.describe()
+
+df['language'].value_counts()
+
+langs = ["English" ,"French", "Mandarin"]
+cond=df['language'].isin(langs)
+ans=df[cond & (df.imdb_score >7)]
+ans.shape
+
+
+#Histogram
+plt.rcParams['figure.figsize']=6,6
+plt.hist(df['imdb_score'], density=True)
+x=plt.hist(df['imdb_score'], bins=20, color="#5ee3ff")
+x
+
+import seaborn as sns
+#%%
+log_budget = np.log10(df['budget'])
+log_budget.plot.hist()
+plt.xlabel('log of budget')
+plt.ylabel('count')
+plt.title('Histogram of budget', fontsize=20)
+#%%
+
+log_budget.plot(kind='hist')
+
+
+#Scatterplot
+
+#%%
+plt.scatter(df['budget'], df['gross'])
+plt.xlabel('Budget')
+plt.ylabel('Gross Income')
+#%%
+
+#%%
+#df.plot.scatter(x='budget', y='gross')
+df.plot(kind='scatter',x='budget', y='gross')
+plt.xlabel('Budget')
+plt.ylabel('Gross Income')
+#%%
+
+outliers = df[['gross', 'budget']].dropna()
+outliers = outliers.loc[~outliers.apply(lambda x: np.abs(x - x.mean()) / x.std() < 3).all(axis=1)]
+
+score_df = df[['gross', 'imdb_score']]
+score_df.plot.scatter('gross', 'imdb_score')
+
+#Barplot
+plt.figure(figsize=(12,6))
+df.groupby('country')['imdb_score'].median().sort_values(ascending=False).plot.bar(color='b')
+
+df[['country','imdb_score']].groupby('country').median().sort_values(ascending=False, by='imdb_score').plot(kind='bar', color='b')
+
+plt.figure(figsize=(12,6))
+df.groupby('country')['imdb_score'].median().sort_values(ascending=False).head(10).plot.bar(color='b')
+
+
+dg = df.groupby('country').agg({'duration':'count','imdb_score':'mean'})
+dg[dg.duration>10].sort_values(ascending=False, by='imdb_score').plot(kind='bar',y='imdb_score', color='b')
+
+#Boxplot
+#%%
+df_score = df[['color', 'imdb_score']]
+df_score.boxplot(by='color', column='imdb_score')
+plt.ylabel('Imdb Score')
+#%%
+
+#Convert data types
+str(43)
+int('4')
+str(3.14)
+float('3.14')
+
+#String formatting
+# % formatting
+'hello %s' % name
+'hello %.2f' % number
+
+#String formatting
+'hello {0}.You are{1}'.format(name, age) #You can reference the index of the variable or the name
+'hello {name}.You are{age}'.format(name=name, age=age)
+
+#f-string
+f'Hello {name}.You are {age}'

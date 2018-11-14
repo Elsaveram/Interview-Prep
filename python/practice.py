@@ -560,4 +560,26 @@ def diagonalDifference(arr):
                 d2 += arr[i][j]
     return abs(d1-d2)
 
-diagonalDifference([[11,2,4],[4,5,6],[10, 8, -12]])                
+diagonalDifference([[11,2,4],[4,5,6],[10, 8, -12]])
+
+def plusMinus(arr):
+    pos=0
+    neg=0
+    zer=0
+    total=len(arr)
+    for element in arr:
+        if element ==0:
+            zer += 1
+        elif element <0:
+            neg += 1
+        else:
+            pos += 1
+    pos=pos/total
+    neg=neg/total
+    zer=zer/total
+    print ('%.6f' %pos)
+    print ('%.6f' %neg)
+    print ('%.6f' %zer)
+
+
+plusMinus([-4, 3, -9, 0, 4, 1])
