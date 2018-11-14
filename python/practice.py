@@ -583,3 +583,9 @@ def plusMinus(arr):
 
 
 plusMinus([-4, 3, -9, 0, 4, 1])
+
+def staircase(n):
+    for stairs in range(1, n + 1):
+        print (' ' * (n - stairs) + '#' * stairs)
+
+staircase(6)
