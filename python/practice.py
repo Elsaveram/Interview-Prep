@@ -254,7 +254,52 @@ def makeAnagram(a, b):
         if abs(a_count-b_count) != 0:
             deletions += abs(a_count-b_count)
     return deletions
+#Given two strings, check to see if they are anagrams. An anagram is when the two strings can be written using the exact same letters
+#1
+def anagram(s1,s2):
+    w1=list(s1.replace(' ','').lower())
+    w2=list(s2.replace(' ','').lower())
 
+    for letter in set(w1+w2):
+        c1=w1.count(letter)
+        c2=w2.count(letter)
+        if abs(c1-c2)!=0:
+            return False
+
+    return True
+#2
+def anagram2(s1,s2):
+
+    s1 = s1.replace(' ','').lower()
+    s2 = s2.replace(' ','').lower()
+
+    return sorted(s1) == sorted(s2)
+#3
+def anagram3(s1,s2):
+
+    s1 = s1.replace(' ','').lower()
+    s2 = s2.replace(' ','').lower()
+
+    #check same number of letters
+    if len(s1) != len(s2):
+        return False
+
+    count = {}
+
+    for letter in s1:
+        if letter in count:
+            count[letter] += 1
+        else:
+            count[letter] = 1
+    for letter in s2:
+        if letter in count:
+            count[letter] -= 1
+        else:
+            count[letter] =1
+    for k in count:
+        if count[k] != 0:
+            return False
+    return True
 #Alternating Characters
 def alternatingCharacters(s):
     deletions=0
