@@ -589,3 +589,36 @@ def staircase(n):
         print (' ' * (n - stairs) + '#' * stairs)
 
 staircase(6)
+
+#Min-Max Sum
+
+def miniMaxSum(arr):
+    arr_sum=[]
+    for i in arr:
+        arr_sum.append(sum(arr)-i)
+    print(min(arr_sum), max(arr_sum))
+
+miniMaxSum([1,2,3,4,5])
+
+
+#BirthdayCakeCandles
+def birthdayCakeCandles(ar):
+    num_candles=0
+    for num in ar:
+        if num==max(ar):
+            num_candles += 1
+    return num_candles
+
+def birthdayCakeCandles(ar):
+    return(len([i for i in ar if i==max(ar)]))
+
+def birthdayCakeCandles(ar):
+    return len(list(filter(lambda x: x==max(ar), ar)))
+
+def birthdayCakeCandles(ar):
+    return ar.count(max(ar))
+
+birthdayCakeCandles([3,2,1,3])
+
+#timeConversion
+def timeConversion(s):
