@@ -274,7 +274,7 @@ def anagram2(s1,s2):
     s2 = s2.replace(' ','').lower()
 
     return sorted(s1) == sorted(s2)
-#3
+#3 Best O(n)
 def anagram3(s1,s2):
 
     s1 = s1.replace(' ','').lower()
@@ -300,6 +300,64 @@ def anagram3(s1,s2):
         if count[k] != 0:
             return False
     return True
+
+# Given an integer array, output all the * *unique ** pairs that sum up to a specific value k.
+
+#1 O(n2)
+def pair_sum(arr,k):
+    l = list(range(len(arr)))
+    lis_pairs = []
+
+    for i in l:
+        for j in l:
+            if i != j:
+                if arr[i] + arr [j] == k:
+                    lis_pairs.append (tuple(sorted((arr[i],arr[j]))))
+    print (set(lis_pairs))
+    return len(set(lis_pairs))
+
+#2 O(1) + 2 * O(log n) + O(n)
+def pair_sum2(arr,k):
+    sor_arr = sorted(arr)
+    arr_rem =sorted(arr)
+    count_pairs = 0
+    pairs = []
+
+    for i in list(range(len(sor_arr))):
+
+        num = sor_arr[i]
+
+        if num <= k/2:
+
+            if k-num in arr_rem[i:]:
+                count_pairs += 1
+                pairs.append((num,k-num))
+                arr_rem.remove(k-num)
+
+    print(pairs)
+    return count_pairs
+
+# O(n) Preferred
+def pair_sum3(arr, k):
+
+    if len(arr) < 2:
+        return "less than 2 elements in array"
+
+    seen = set()
+    output = set()
+
+    for num in arr:
+
+        target = k - num
+
+        if target not in seen:
+            seen.add(num)
+
+        else:
+            output.add( (min(num, target), max(num, target)))
+
+    return len(output)
+
 #Alternating Characters
 def alternatingCharacters(s):
     deletions=0
