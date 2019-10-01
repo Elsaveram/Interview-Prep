@@ -357,6 +357,35 @@ def pair_sum3(arr, k):
             output.add( (min(num, target), max(num, target)))
 
     return len(output)
+# Missing element: Consider an array of non-negative integers. A second array is formed by shuffling
+# the elements of the first array and deleting a random element. Given these two arrays,
+# find which element is missing in the second array.
+
+#1 3*O(n)
+def finder2(arr1, arr2):
+    output = {}
+
+    for ele in arr1:
+        if ele in output:
+            output[ele] += 1
+        else:
+            output[ele] = 1
+    for ele in arr2:
+        if ele in output:
+            output[ele] -= 1
+        else:
+            output[ele] = 1
+    for k in output:
+        if output[k] > 0:
+            return k
+#2 O(nlogn)
+def finder3(arr1, arr2):
+    arr1.sort()
+    arr2.sort()
+    for a, b in zip(arr1, arr2):
+        if a != b:
+            return a
+    return arr1[-1]
 
 #Alternating Characters
 def alternatingCharacters(s):
